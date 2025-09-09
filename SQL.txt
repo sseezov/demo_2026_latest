@@ -1,0 +1,21 @@
+CREATE TABLE employees
+(
+    id serial PRIMARY KEY,
+    role text,
+    fullname text,
+    login text UNIQUE,
+    password text
+);
+
+INSERT INTO employees (role, fullname, login, password)
+VALUES 
+('Администратор', 'Никифорова Весения Николаевна', '94d5ous@gmail.com', 'uzWC6'),
+('Администратор', 'Сазонов Руслан Германович', 'uth4iz@mail.com', '2L6KZ'),
+('Администратор', 'Одинцов Серафим Артёмович', 'yzls62@outlook.com', 'JlFRC'),
+('Менеджер', 'Степанов Михаил Артёмович', '1diph5e@tutanota.com', '8ntwU'),
+('Менеджер', 'Ворсин Петр Евгеньевич', 'tjde7c@yahoo.com', 'YOyhf'),
+('Менеджер', 'Старикова Елена Павловна', 'wpmrc3do@tutanota.com', 'RSbvH'),
+('Авторизированный клиент', 'Михайлюк Анна Вячеславовна', '5d4zbu@tutanota.com', 'rwVDh'),
+('Авторизированный клиент', 'Ситдикова Елена Анатольевна', 'ptec8ym@yahoo.com', 'LdNyo'),
+('Авторизированный клиент', 'Ворсин Петр Евгеньевич', '1qz4kw@mail.com', 'gynQM'),
+('Авторизированный клиент', 'Старикова Елена Павловна', '4np6se@mail.com', 'AtnDjr');
