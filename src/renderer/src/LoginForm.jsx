@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 
-function LoginForm() {
+function LoginForm({ setUser }) {
+  console.log(setUser)
   const navigate = useNavigate();
 
   async function submitHandler(e) {
@@ -10,6 +11,7 @@ function LoginForm() {
       password: e.target.password.value,
     }
     const role = await window.api.autorizeUser(user);
+    setUser({ role })
     if (role === 'Администратор') {
       navigate('/main');
     }
@@ -18,7 +20,6 @@ function LoginForm() {
 
   return (
     <>
-      {/* <img alt="logo" className="logo" src={electronLogo} /> */}
       <h1>Приветствие!</h1>
       <h4>Введите логин и пароль, чтобы войти</h4>
       <form onSubmit={(e) => submitHandler(e)}>
