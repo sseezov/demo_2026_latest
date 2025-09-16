@@ -9,11 +9,19 @@ async function authorize(event, user) {
   const { login, password } = user;
 
   try {
-    const response = await global.dbclient.query(`SELECT LOGIN, PASSWORD, ROLE FROM EMPLOYEES`);
+    const response = await global.dbclient.query(`SELECT LOGIN, FULLNAME, PASSWORD, ROLE FROM EMPLOYEES`);
     const user = response.rows.find((user) => user.login === login && user.password === password);
     if (user) {
-      return user.role;
+      return { role: user.role, name: user.fullname };
     } dialog.showErrorBox('Такого пользователя нет', 'Попробуйте ввести другой логин и/или пароль')
+  } catch (e) {
+    return ('error')
+  }
+}
+async function getGoods(event) {
+  try {
+    const response = await global.dbclient.query(`SELECT * from goods`);
+    return response.rows;
   } catch (e) {
     return ('error')
   }
@@ -54,6 +62,7 @@ app.whenReady().then(async () => {
   global.dbclient = await connectDB();
 
   ipcMain.handle('authorizeUser', authorize)
+  ipcMain.handle('getGoods', getGoods)
 
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)

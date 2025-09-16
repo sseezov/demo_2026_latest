@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router";
 
 function LoginForm({ setUser }) {
-  console.log(setUser)
   const navigate = useNavigate();
 
   async function submitHandler(e) {
@@ -10,8 +9,9 @@ function LoginForm({ setUser }) {
       login: e.target.login.value,
       password: e.target.password.value,
     }
-    const role = await window.api.autorizeUser(user);
-    setUser({ role })
+    const { role, name } = await window.api.autorizeUser(user);
+    console.log(role, name)
+    setUser({ role, name })
     if (role === 'Администратор') {
       navigate('/main');
     }
@@ -30,7 +30,10 @@ function LoginForm({ setUser }) {
         <button type="submit">Войти</button>
       </form>
       <h5>Перейти на экран просмотра товаров в виде гостя</h5>
-      <button>Посмотреть товары</button>
+      <button onClick={() => {
+        setUser({ role: 'гость' });
+        navigate('/main');
+      }}>Посмотреть товары</button>
     </>
   )
 }
