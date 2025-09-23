@@ -1,7 +1,7 @@
 import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
+import icon from '../../resources/icon.ico?asset'
 
 import connectDB from './db';
 
@@ -32,6 +32,7 @@ function createWindow() {
     width: 900,
     height: 670,
     show: false,
+    icon: join(__dirname, '../../resources/icon.ico'),
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
